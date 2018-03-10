@@ -1,0 +1,142 @@
+private void Draw1()
+    {
+        DataTable table, table2;
+        DataView dView;
+        //----
+        table = new DataTable();
+        table2 = new DataTable();
+        DataColumn column;
+        DataRow row;
+        //---
+        column = new DataColumn();
+        column.DataType = System.Type.GetType("System.Double");
+        column.ColumnName = "Czêstotliwoœæ";
+        table.Columns.Add(column);
+        //---
+        column = new DataColumn();
+        column.DataType = System.Type.GetType("System.Double");
+        column.ColumnName = "Widmo amplitudowe";
+        table.Columns.Add(column);
+        //---
+        column = new DataColumn();
+        column.DataType = System.Type.GetType("System.Double");
+        column.ColumnName = "Czêstotliwoœæ";
+        table2.Columns.Add(column);
+        //---
+        column = new DataColumn();
+        column.DataType = System.Type.GetType("System.Double");
+        column.ColumnName = "Widmo fazowe";
+        table2.Columns.Add(column);
+        //---
+
+
+        for (int i = 0; i <= fmax - fmin; i++)
+        {
+            row = table.NewRow();
+            row["Czêstotliwoœæ"] = Results[i, 0];
+            row["Widmo amplitudowe"] = Results[i, 1];
+            table.Rows.Add(row);
+        }
+        dView = new DataView(table);
+        //---
+        Chart1.Series.Clear();
+        //---
+        //Chart1.ChartAreas.Add("ChartArea2");
+        //**************************************
+        Chart1.DataBindTable(dView, "Czêstotliwoœæ");
+        //**************************************
+        Chart1.Series["Widmo amplitudowe"].ChartType = SeriesChartType.Line;
+        Chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{#0}";
+        //---
+        Chart1.Height = 300;
+        Chart1.Width = 800;
+        //Chart1.BackColor = System.Drawing.Color.Green;
+        //---
+        Chart1.ChartAreas[0].BackColor = System.Drawing.Color.Azure;
+        //---
+        Chart1.ChartAreas[0].AxisX.LineWidth = 3;
+        //---
+        Chart1.ChartAreas[0].AxisX.Title = "f [Hz]";
+        //---
+        Chart1.ChartAreas[0].AxisY.Title = "ku [dB]";
+        //---
+        Chart1.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Italic);
+        //---
+        Chart1.ChartAreas[0].AxisX.LogarithmBase = 10;
+        Chart1.ChartAreas[0].AxisX.IsLogarithmic = true;
+
+        //---
+        Chart1.ChartAreas[0].AxisY.TitleFont =
+            new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+        //---
+        Chart1.Titles.Add("Widmo amplitudowe");
+        //---
+        Chart1.Titles[0].Font =
+            new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold);
+        //---
+        Chart1.Titles[0].ForeColor = System.Drawing.Color.Red;
+        //---
+        Chart1.Legends[0].DockedToChartArea = Chart1.ChartAreas[0].Name;
+        //---
+        Chart1.Legends[0].Docking = Docking.Right;
+        //---
+        Chart1.ChartAreas[0].AxisX.Minimum = fmin;
+        Chart1.ChartAreas[0].AxisX.Maximum = fmax;
+        //****************************************
+
+
+
+
+        for (int i = 0; i <= fmax - fmin; i++)
+        {
+            row = table2.NewRow();
+            row["Czêstotliwoœæ"] = Results[i, 0];
+            row["Widmo fazowe"] = Results[i, 2];
+            table2.Rows.Add(row);
+        }
+        dView = new DataView(table2);
+        //---
+        Chart2.Series.Clear();
+        //---
+        //Chart1.ChartAreas.Add("ChartArea2");
+        //**************************************
+        Chart2.DataBindTable(dView, "Czêstotliwoœæ");
+        //**************************************
+        Chart2.Series["Widmo fazowe"].ChartType = SeriesChartType.Line;
+        Chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{#0}";
+        //---
+        Chart2.Height = 300;
+        Chart2.Width = 800;
+        //Chart1.BackColor = System.Drawing.Color.Green;
+        //---
+        Chart2.ChartAreas[0].BackColor = System.Drawing.Color.Azure;
+        //---
+        Chart2.ChartAreas[0].AxisX.LineWidth = 3;
+        //---
+        Chart2.ChartAreas[0].AxisX.Title = "f [Hz]";
+        //---
+        Chart2.ChartAreas[0].AxisY.Title = "fi [rad]";
+        //---
+        Chart2.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Italic);
+        //---
+        Chart2.ChartAreas[0].AxisX.LogarithmBase = 10;
+        Chart2.ChartAreas[0].AxisX.IsLogarithmic = true;
+
+        //---
+        Chart2.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+        //---
+        Chart2.Titles.Add("Widmo fazowe");
+        //---
+        Chart2.Titles[0].Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Bold);
+        //---
+        Chart2.Titles[0].ForeColor = System.Drawing.Color.Red;
+        //---
+        Chart2.Legends[0].DockedToChartArea = Chart2.ChartAreas[0].Name;
+        //---
+        Chart2.Legends[0].Docking = Docking.Right;
+        //---
+        Chart2.ChartAreas[0].AxisX.Minimum = fmin;
+        Chart2.ChartAreas[0].AxisX.Maximum = fmax;
+        //****************************************
+
+    }
